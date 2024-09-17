@@ -13,10 +13,6 @@ load_dotenv()
 
 app = FastAPI()
 
-# Check if the model already exists, if not, download it
-if not os.path.exists(model_path):
-    download_file_from_google_drive(model_url, model_path)
-
 # Initialize BERT model and tokenizer
 model_path = 'bert_model.pt'
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
