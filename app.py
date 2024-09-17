@@ -5,13 +5,28 @@ import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 import google.generativeai as genai
 import os
-from dotenv import load_dotenv
+import requests
 import json
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = FastAPI()
+
+# Function to download model from Google Drive
+def download_file_from_google_drive(url: str, destination: str):
+    response = requests.get(url)
+    with open(destination, 'wb') as f:
+        f.write(response.content)
+
+# Google Drive direct download link (replace with your model's link)
+model_url = os.getenv("MODEL_DRIVE_PATH")
+model_path = 'bert_model.pt'
+
+# Check if the model already exists, if not, download it
+if not os.path.exists(model_path):
+    download_file_from_google_drive(model_url, model_path)
 
 # Initialize BERT model and tokenizer
 model_path = 'bert_model.pt'
