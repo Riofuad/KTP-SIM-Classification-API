@@ -4,3 +4,4 @@ torch==2.0.0
 transformers==4.30.0
 google-generativeai==0.1.0
 python-dotenv==1.0.1
+tensorflow==2.17.0
